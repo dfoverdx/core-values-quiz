@@ -53,8 +53,8 @@ export default class QuizQuestion extends Component {
                         <div className='or-col'>
                             or
                         </div>
-                        <div className='right-col' data-btn={0} onClick={this.handleBtnClick}>
-                            <Button bsSize="large">
+                        <div className='right-col'>
+                            <Button bsSize="large" data-btn={0} onClick={this.handleBtnClick}>
                                 <h2>{ option2.name }</h2>
                                 <p>{ option2.desc}</p>
                             </Button>
