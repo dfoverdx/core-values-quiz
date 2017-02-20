@@ -1,5 +1,6 @@
 let values = [
     { name: 'Acceptance', desc: 'to be open to and accepting of myself, others, life etc' },
+    { name: 'Adventure', desc: 'to be adventurous; to actively seek, create, or explore novel or stimulating experiences' },
     { name: 'Assertiveness', desc: 'to respectfully stand up for my rights and request what I want' },
     { name: 'Authenticity', desc: 'to be authentic, genuine, real; to be true to myself' },
     { name: 'Beauty', desc: 'to appreciate, create, nurture or cultivate beauty in myself, others, the environment etc' },

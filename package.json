@@ -2,10 +2,10 @@
   "name": "rankValues",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://dfoverdx.github.io/core-values-quiz",
+  "homepage": "https://dfoverdx.github.io/core-values-quiz",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dfoverdx/core-value-quiz.git"
+    "url": "https://dfoverdx@github.com/dfoverdx/core-value-quiz.git"
   },
   "devDependencies": {
     "gh-pages": "^0.12.0",
