@@ -1,0 +1,65 @@
+.or-col {
+    width: 60px; 
+    max-width: 60px;
+    text-align: center;
+    font-size: 28px;
+    padding: 8;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    cursor: default;
+}
+
+@media(max-width: 767px) {
+    .left-col, .right-col {
+        text-align: center;
+    }
+
+    .left-col button, .right-col button {
+        max-width: 350px;
+        width: 350px;
+    }
+
+    .or-col {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media(min-width: 768px) {
+    .left-col, .or-col, .right-col {
+        display: inline-block;
+    }
+
+    .left-col {
+        text-align: right;
+    }
+
+    .right-col {
+        text-align: left;
+    }
+}
+
+.left-col button p,.right-col button p {
+    white-space: normal;
+    max-width: 350px;
+    height: 72px;
+    text-align: left;
+}
+
+@keyframes fadeBG {
+    from {
+        background-color: green;
+    }
+
+    to {
+        background-color: white;
+    }
+}
+
+.fadeBg {
+    animation-name: fadeBG;
+    animation-duration: 1s;
+}
