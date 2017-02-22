@@ -24,7 +24,7 @@ export default class QuizResults extends Component {
 
         return (
             <div>
-                <Col xs={12} sm={8}>
+                <Col xs={12} sm={8} style={{ marginBottom: 40 }}>
                     <ListGroup>
                         {items}
                     </ListGroup>
