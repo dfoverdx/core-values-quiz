@@ -68,7 +68,7 @@ class App extends Component {
                     </Grid>
                 </Jumbotron>
                 {qi}
-                <Navbar fixedBottom>
+                <Navbar fixedBottom className='hidden-xs'>
                     <div className='navbar-text'>
                         <a className='navbar-link' href="http://thehappinesstrap.com/upimages/complete_worksheets_for_The_Confidence_Gap.pdf">
                             Core values PDF
