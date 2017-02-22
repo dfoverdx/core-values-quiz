@@ -59,16 +59,4 @@ let values = [
     { name: 'Trust', desc: 'to be trustworthy; to be loyal, faithful, sincere, and reliable' }
 ];
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-// shuffle values
-for (let i = 0; i < values.length; i++) {
-    let swapi = getRandomInt(i, values.length);
-    let temp = values[i];
-    values[i] = values[swapi];
-    values[swapi] = temp;
-}
-
 export default values;

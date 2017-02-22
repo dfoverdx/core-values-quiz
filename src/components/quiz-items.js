@@ -1,9 +1,9 @@
 import React from 'react';
-import $ from 'jquery';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import * as Constants from '../constants/quiz-constants';
 import Component from './component';
 import QuizQuestion from './quiz-question';
+import QuizMiddleQuestion from './quiz-middle-question';
 import '../styles/quiz-items.css';
 
 import QuizActions from '../actions/quiz-actions';
@@ -13,29 +13,31 @@ export default class QuizItems extends Component {
     constructor(props) {
         super(props, 'onChange');
         this.state = {
-            leftOption: {},
-            rightOption: {},
+            leftOption: null,
+            leftIdx: null,
+            midOption: null,
+            midIdx: null,
+            rightOption: null,
+            rightIdx: null,
             comparisons: 0,
             isNewPivot: false
         };
     }
 
     componentDidMount() {
-        $(window).on('resize', this.resizeTable);
-        this.resizeTable();
-
         QuizStore.addChangeListener(this.onChange);
         QuizActions.beginQuiz();
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        if (this.state.rightOption.name && this.state.rightOption.name !== nextState.rightOption.name) {
-            this.setState({
-                isNewPivot: true
-            });
-
-            setTimeout(() => this.setState({ isNewPivot: false }), 1000);
-        }
+    componentDidUpdate(prevProps, prevState) {
+        setTimeout(() => {
+            if (prevState.rightOption &&
+                (this.state.midOption || this.state.rightOption.name !== prevState.rightOption.name)) {
+                this.setState({
+                    isNewPivot: true
+                });
+            }
+        }, 10);
     }
 
     onChange(e) {
@@ -43,36 +45,58 @@ export default class QuizItems extends Component {
             this.setState({
                 leftOption: e.left,
                 rightOption: e.right,
+                midOption: null,
+                leftIdx: null,
+                midIdx: null,
+                rightIdx: null,
                 comparisons: e.comparisons,
+                isNewPivot: false,
+            });
+        } else if (e.eventName === Constants.PROMPT_USER_FOR_MID) {
+            this.setState({
+                leftOption: e.left,
+                leftIdx: e.leftIdx,
+                midOption: e.mid,
+                midIdx: e.midIdx,
+                rightOption: e.right,
+                rightIdx: e.rightIdx,
+                comparisons: e.comparisons,
+                isNewPivot: false,
             });
         }
     }
 
-    resizeTable() {
-        if (window.innerWidth >= 768) {
-            let par = $('.left-col').parent(),
-                width = par.width(),
-                usableWidth = width - $('.or-col').width(),
-                colWidth = usableWidth / 2;
-            $('.left-col, .right-col').width(colWidth);
-        } else {
-            $('.left-col, .right-col').css('width', '');
-        }
-    }
-
     render() {
+        let isChoosePivot = !!this.state.midOption,
+            qq = null;
+
+        if (this.state.leftOption) { // check if we even have a prompt
+            if (!isChoosePivot) {
+                qq = <QuizQuestion left={ this.state.leftOption } right={ this.state.rightOption } 
+                        prompt='Which is more important to you?' />;
+            } else {
+                qq = <QuizMiddleQuestion left={ this.state.leftOption } leftIdx={ this.state.leftIdx }
+                        mid={ this.state.midOption } midIdx={ this.state.midIdx }
+                        right={ this.state.rightOption } rightIdx={ this.state.rightIdx }
+                        prompt={ <span>Which of these three is the <i>second</i> most important to you?</span> } />;
+            }
+        }
+
         let lgiClass = this.state.isNewPivot ? 'fadeBg' : '';
+
         return (
             <div>
                 <ListGroup>
-                    <ListGroupItem className={lgiClass}>
-                        <QuizQuestion option1={ this.state.leftOption } option2={ this.state.rightOption } />
+                    <ListGroupItem className={ lgiClass }>
+                        { qq }
                         <h3 style={{ textAlign: 'center' }}>Questions answered: {this.state.comparisons}</h3>
-                        <p style={{textAlign: 'center'}}>On average, this quiz is 311 questions long, but it depends on your answers.</p>
+                        <p style={{ textAlign: 'center' }}>On average, this quiz is 284 questions long, but it depends on your answers.</p>
                     </ListGroupItem>
                 </ListGroup>
                 <div className='text-muted' style={{textAlign: 'center'}}>
-                    Hint: You can press <kbd>A</kbd> to select the left option and <kbd>L</kbd> to select the right one.
+                    Tip: You can press <span className='kbd'>A</span> to select the left 
+                        option, <span className='kbd'>L</span> to select the right option, 
+                        and <span className='kbd'>F</span> to select the middle option (when there is one).
                 </div>
             </div>
         );

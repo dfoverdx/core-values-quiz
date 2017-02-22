@@ -10,48 +10,85 @@
     -webkit-user-select: none;
     -o-user-select: none;
     cursor: default;
+    display: inline-block;
 }
 
-@media(max-width: 767px) {
-    .left-col, .right-col {
+.quiz-btn {
+    max-width: 340px;
+    min-width: 340px;
+    width: 340px;
+
+    margin: 0 4px;
+}
+
+.quiz-btn h2 {
+    margin-top: 10px;
+}
+
+.quiz-btn p {
+    white-space: normal;
+    height: 72px;
+    text-align: left;
+    max-width: 330px;
+    font-size: 16px;
+}
+
+.quiz-btn .kdb ~ p {
+    max-width: 300px;
+}
+
+.left-col {
+    text-align: right;
+}
+
+.right-col {
+    text-align: left;
+}
+
+.left-col, .mid-col, .right-col {
+    margin-top: 8px;
+    display: inline-block;
+}
+
+.three-cols, .two-cols {
+    text-align: center;
+}
+
+@media(max-width: 1100px) {
+    .three-cols .left-col, .three-cols .mid-col, .three-cols .right-col {
+        display: block;
         text-align: center;
     }
+}
 
-    .left-col button, .right-col button {
-        max-width: 350px;
-        width: 350px;
+@media(max-width: 820px) {
+    .two-cols .left-col, .two-cols .right-col {
+        display: block;
+        text-align: center;
     }
 
     .or-col {
         width: 100%;
         max-width: 100%;
+        display: block;
     }
 }
 
-@media(min-width: 768px) {
-    .left-col, .or-col, .right-col {
-        display: inline-block;
-    }
-
-    .left-col {
-        text-align: right;
-    }
-
-    .right-col {
-        text-align: left;
-    }
+.quiz-btn .kbd {
+    font-size: 16px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.left-col button p,.right-col button p {
-    white-space: normal;
-    max-width: 350px;
-    height: 72px;
-    text-align: left;
+.quiz-btn .kbd ~ * {
+    margin-left: 40px;
 }
 
 @keyframes fadeBG {
     from {
-        background-color: green;
+        background-color: rgb(133, 248, 210);
     }
 
     to {
@@ -62,4 +99,9 @@
 .fadeBg {
     animation-name: fadeBG;
     animation-duration: 1s;
+}
+
+.quiz-btn {
+    position: relative;
+    max-width: 340px;
 }

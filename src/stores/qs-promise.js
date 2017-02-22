@@ -1,7 +1,8 @@
 export default class QS {
-    constructor(array, promptUser, done) {
+    constructor(array, promptUser, done, promptForMiddle) {
         this._array = array;
         this._promptUser = promptUser;
+        this._promptForMiddle = promptForMiddle;
         this._done = done;
         // this._comparisons = 0;
     }
@@ -19,19 +20,19 @@ export default class QS {
 
     runQS(low, high, resolve, part) {
         if (low < high) {
-            return new Promise(r => {
-                this.partition(low, high, r);
-            }).then(p => {
-                return new Promise(r => {
-                    this.runQS(low, p - 1, r, p);
-                });
-            }).then(p => {
-                return new Promise(r => {
-                    this.runQS(p + 1, high, r, p);
-                });
-            }).then(() => {
-                resolve(part);
-            });
+            let p = Promise.resolve();
+
+            if (high - low > 5 && this._promptForMiddle) {
+                p = p.then(() => new Promise(res => this._promptForMiddle(this._array, high, res)))
+                     .then(mid => swap(this._array, high, mid));
+            }
+
+            p = p.then(() => new Promise(r => { this.partition(low, high, r); }))
+                 .then(p => new Promise(r => { this.runQS(low, p - 1, r, p); }))
+                 .then(p => new Promise(r => { this.runQS(p + 1, high, r, p); }))
+                 .then(() => { resolve(part); });
+
+            return p;
         } else {
             resolve(part);
         }
@@ -46,7 +47,7 @@ export default class QS {
         function inner(i, j, doSwap) {
             if (doSwap) {
                 i++;
-                self.swap(i, j);
+                swap(self._array, i, j);
             }
 
             j++;
@@ -54,14 +55,14 @@ export default class QS {
                 addThen(i, j);
             } else {
                 i++;
-                self.swap(i, high);
+                swap(self._array, i, high);
                 res(i);
             }
         }
 
         function addThen(i, j) {
             partProm = partProm.then(() => {
-                self._comparisons++;
+                // self._comparisons++;
                 return new Promise(r => {
                     self._promptUser(self._array, j, high, r);
                 });
@@ -74,10 +75,10 @@ export default class QS {
             addThen(i, j);
         }
     }
+}
 
-    swap(i, j) {
-        let temp = this._array[i];
-        this._array[i] = this._array[j];
-        this._array[j] = temp;
-    }
+function swap(a, i, j) {
+    let temp = a[i];
+    a[i] = a[j];
+    a[j] = temp;
 }

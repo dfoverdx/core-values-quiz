@@ -1,63 +1,37 @@
-import $ from 'jquery';
 import React from 'react';
-import { Col, Row, Button } from 'react-bootstrap';
-import Component from './component';
+import { Col, Row } from 'react-bootstrap';
 
+import Component from './component';
+import QuizButton from './quiz-button';
 import QuizActions from '../actions/quiz-actions';
-import QuizStore from '../stores/quiz-store';
 
 export default class QuizQuestion extends Component {
     constructor(props) {
-        super(props, 'handleBtnClick');
-    }
-
-    handleBtnClick(e) {
-        QuizActions.makeComparison($(e.target).closest('button,.btn').data('btn'));
-    }
-
-    componentDidMount() {
-        $(window).on('keydown', (e) => {
-            if (!QuizStore.isDone) {
-                switch (e.key) {
-                    case 'a':
-                        QuizActions.makeComparison(true);
-                        break;
-                    case 'l':
-                        QuizActions.makeComparison(false);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+        super(props)
     }
 
     render() {
-        let { option1, option2 } = this.props;
+        let { left, right, prompt } = this.props;
 
         return (
             <div>
                 <Row>
                     <Col xs={12} style={{ textAlign: 'center' }}>
-                        <h1>Which is more important to you?</h1>
+                        <h1>{ prompt }</h1>
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={12}>
+                    <Col xs={12} className='two-cols'>
                         <div className='left-col'>
-                            <Button bsSize="large" data-btn={1} onClick={this.handleBtnClick}>
-                                <h2>{ option1.name }</h2>
-                                <p>{ option1.desc}</p>
-                            </Button>
+                            <QuizButton name={ left.name } desc={ left.desc } keyShortcut='A' btnVal={ true }
+                                quizAction={ QuizActions.makeComparison } />
                         </div>
                         <div className='or-col'>
                             or
                         </div>
                         <div className='right-col'>
-                            <Button bsSize="large" data-btn={0} onClick={this.handleBtnClick}>
-                                <h2>{ option2.name }</h2>
-                                <p>{ option2.desc}</p>
-                            </Button>
+                            <QuizButton name={ right.name } desc={ right.desc } keyShortcut='L' btnVal={ false }
+                                quizAction={ QuizActions.makeComparison } />
                         </div>
                     </Col>
                 </Row>
@@ -67,6 +41,7 @@ export default class QuizQuestion extends Component {
 }
 
 QuizQuestion.propTypes = {
-    option1: React.PropTypes.object.isRequired,
-    option2: React.PropTypes.object.isRequired
+    left: React.PropTypes.object.isRequired,
+    right: React.PropTypes.object.isRequired,
+    prompt: React.PropTypes.string.isRequired,
 };

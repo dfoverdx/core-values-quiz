@@ -31,6 +31,7 @@ export default class QuizResults extends Component {
                 </Col>
                 <Col xs={12} sm={4}>
                     <Panel header="Results">
+                        <div>Questions answered: { this.props.comparisons }</div>
                         <Button onClick={this.saveResults} style={{width: '100%'}}>
                             <Glyphicon glyph='floppy-save' style={{marginRight: 6}} />
                             Save results to file
@@ -41,3 +42,8 @@ export default class QuizResults extends Component {
         );
     }
 }
+
+QuizResults.propTypes = {
+    array: React.PropTypes.array.isRequired,
+    comparisons: React.PropTypes.number.isRequired,
+};
