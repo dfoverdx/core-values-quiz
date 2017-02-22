@@ -22,7 +22,7 @@ export default class About extends Component {
                     </ul>
                     <p>
                         When taking this quiz, it is most effective if you choose one frame of reference, and stick to it 
-                        throughout the whole quiz.  Otherwise, when you've got to choose between <i>equality</i> with <i>fun</i>,
+                        throughout the whole quiz.  Otherwise, when you've got to choose between <i>equality</i> and <i>fun</i>,
                         it might be hard to make the comparison in any meaningful way.
                     </p>
                     <div style={{ textAlign: 'center' }}>
