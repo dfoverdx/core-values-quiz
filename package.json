@@ -5,7 +5,7 @@
   "homepage": "https://dfoverdx.github.io/core-values-quiz",
   "repository": {
     "type": "git",
-    "url": "https://dfoverdx@github.com/dfoverdx/core-value-quiz.git"
+    "url": "https://github.com/dfoverdx/core-values-quiz.git"
   },
   "devDependencies": {
     "gh-pages": "^0.12.0",

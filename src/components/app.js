@@ -75,7 +75,7 @@ class App extends Component {
                         </a> / <a className='navbar-link' href="https://github.com/dfoverdx/core-value-quiz">Source Code</a>
                     </div>
                     <div className='navbar-right navbar-text'>
-                        © Jordan Hitch 2017
+                        © 2017 Jordan Hitch
                     </div>
                 </Navbar>
             </div>

@@ -23,7 +23,7 @@ export default class QuizResults extends Component {
         let items = this.props.array.map(i => <ListGroupItem><span style={{ fontSize: '24px'}}>{i.name}</span> {i.desc}</ListGroupItem>);
 
         return (
-            <div>
+            <div className='container'>
                 <Col xs={12} sm={8} style={{ marginBottom: 40 }}>
                     <ListGroup>
                         {items}
