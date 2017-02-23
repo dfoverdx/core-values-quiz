@@ -1,0 +1,13 @@
+.navbar-text .list-inline {
+    display: block;
+}
+
+.navbar-text .list-inline li {
+    display: inline-block;
+    padding: 0;
+}
+
+.navbar-text .list-inline li:not(:last-of-type):after {
+    content: '|';
+    margin: 0 5px;
+}
