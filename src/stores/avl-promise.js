@@ -1,5 +1,3 @@
-// 'use strict';
-
 // let _comparisons = 0;
 
 class TreeNode {

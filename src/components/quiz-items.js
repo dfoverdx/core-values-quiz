@@ -82,7 +82,23 @@ export default class QuizItems extends Component {
             }
         }
 
-        let lgiClass = this.state.isNewPivot ? 'fadeBg' : '';
+        let lgiClass = this.state.isNewPivot ? 'fadeBg' : '',
+            divBtnMsg;
+
+        if (QuizStore.algorithmName === 'qs') {
+            divBtnMsg = (
+                <span>
+                    Tip: You can press <span className='kbd'>A</span> to select the left 
+                        option, <span className='kbd'>L</span> to select the right option, 
+                        and <span className='kbd'>F</span> to select the middle option (when there is one).
+                </span>);
+        } else {
+            divBtnMsg = (
+                <span>
+                    Tip: You can press <span className='kbd'>A</span> to select the left 
+                        option and <span className='kbd'>L</span> to select the right option.
+                </span>);
+        }
 
         return (
             <div>
@@ -94,9 +110,7 @@ export default class QuizItems extends Component {
                     </ListGroupItem>
                 </ListGroup>
                 <div className='text-muted' style={{textAlign: 'center'}}>
-                    Tip: You can press <span className='kbd'>A</span> to select the left 
-                        option, <span className='kbd'>L</span> to select the right option, 
-                        and <span className='kbd'>F</span> to select the middle option (when there is one).
+                    { divBtnMsg }                    
                 </div>
             </div>
         );
