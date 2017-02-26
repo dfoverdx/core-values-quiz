@@ -1,7 +1,7 @@
 ## Core Values Quiz ##
 
 This "quiz" presents 58 possible core values.  It presents two values at a time.  You choose which of the two is more 
-important to you and [QuickSort](https://en.wikipedia.org/wiki/Quicksort) does the rest.  Once you've completed the 
+important to you and an [AVL-Tree](https://en.wikipedia.org/wiki/AVL_Tree) does the rest.  Once you've completed the 
 quiz, an ordered list is displayed with the option to save your results to a text file.
 
 The core values used were pulled from [this PDF](http://thehappinesstrap.com/upimages/complete_worksheets_for_The_Confidence_Gap.pdf).
