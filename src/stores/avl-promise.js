@@ -1,5 +1,7 @@
 // let _comparisons = 0;
 
+// basic node structure
+// probably should have been a simple object, but I prefer strong-typing
 class TreeNode {
     constructor(value) {
         this._val = value;
@@ -37,18 +39,32 @@ class TreeNode {
     }
 }
 
+// tree object into which we'll add values
+// only handles inserts -- no deletes and no lookups
+// code based on implementation found here: http://www.geeksforgeeks.org/avl-tree-set-1-insertion/ for details
+// look at that page for explanations of rotations and balancing
+// most of the member functions probably should have been static functions outside of the object... c'est la vie
 class AvlTree {
     constructor() {
         this._root = null;
+
+        // used to for memoizing comparisons so that we don't need to prompt the user when the same comparisons come up
+        // during a rebalancing
+        // conveniently, rebalancing never asks for a comparison that hasn't already been made
         this._prevComps = {};
     }
 
+    // inserts a value into an array
     insert(val, promptUser, resolve) {
+        // 1) insert value, which returns a new root node
+        // 2) set the root to the returned node
+        // 3) alert caller that the insert is complete
         return new Promise(res => this._insert(this._root, val, promptUser, res))
             .then(n => { this._root = n; })
             .then(resolve);
     }
 
+    // helper function for getting the height of a node
     _height(node) {
         if (node === null) {
             return 0;
@@ -57,10 +73,12 @@ class AvlTree {
         return node.height;
     }
 
+    // helper function for getting the balance of a node, which is the difference in heights of its children
     _getBalance(node) {
         return this._height(node.left) - this._height(node.right);
     }
 
+    // does a right-rotation during balancing
     _rotateRight(node) {
         let x = node.left,
             t2 = x.right;
@@ -74,6 +92,7 @@ class AvlTree {
         return x;
     }
 
+    // does a left-rotation during balancing
     _rotateLeft(node) {
         let y = node.right,
             t2 = y.left;
@@ -87,6 +106,8 @@ class AvlTree {
         return y;
     }
 
+    // recursive call for insert
+    // on the first call, node should be this._root
     _insert(node, val, promptUser, resolve) {
         if (node === null) {
             resolve(new TreeNode(val));
@@ -95,6 +116,12 @@ class AvlTree {
 
         let self = this;
 
+        // prompt the user for the current comparison
+        // then 
+        //   - memoize the comparison (and its inverse)
+        //   - call _insert() on the appropriate child
+        // then check balance of node, and rebalance in necessary
+        // then alert caller that insertion/rebalancing has completed
         return new Promise(res => {
             // _comparisons++;
             promptUser(node.value, val, res);
@@ -145,26 +172,28 @@ class AvlTree {
         })).then(n => { resolve(n); });
     }
 
+    // kicks off an in-order traversal of the tree
     traverseInOrder() {
         return this._traverseInOrder(this._root);
     }
 
+    // generator function that returns nodes in order
     * _traverseInOrder(node) {
         if (node === null) {
             return;
         }
 
         if (node.left !== null) {
-            for (let val of this._traverseInOrder(node.left)) {
-                yield val;
+            for (let n of this._traverseInOrder(node.left)) {
+                yield n;
             }
         }
 
         yield node.value;
         
         if (node.right !== null) {
-            for (let val of this._traverseInOrder(node.right)) {
-                yield val;
+            for (let n of this._traverseInOrder(node.right)) {
+                yield n;
             }
         }
     }
@@ -175,6 +204,7 @@ class AvlTree {
     }
 }
 
+// sorting object which acts as an interface between the AVL Tree and the QuizStore
 export default class AvlSort {
     constructor(array, promptUser, done) {
         this._array = array;
@@ -183,6 +213,10 @@ export default class AvlSort {
         this._avlTree = new AvlTree();
     }
 
+    // 1) creates a new tree
+    // 2) inserts the items of the array in order
+    // 3) runs in-order traversal of tree to replace items in original array
+    // 4) alerts caller that sorting of _array is done
     run() {
         // _comparisons = 0;
         let p = Promise.resolve();
@@ -203,45 +237,3 @@ export default class AvlSort {
         });
     }
 }
-
-// function getRandom(min, max) {
-//     return Math.floor(Math.random() * (max - min) + min);
-// }
-
-// function swap(a, i, j) {
-//     let tmp = a[i];
-//     a[i] = a[j];
-//     a[j] = tmp;
-// }
-
-// function genArray(len) {
-//     let a = new Array(len);
-//     for (let i = 0; i < len; i++) {
-//         a[i] = i;
-//     }
-
-//     for (let i = 0; i < len; i++) {
-//         swap(a, i, getRandom(i, len));
-//     }
-
-//     return a;
-// }
-
-// let a = genArray(58);
-// console.log(a);
-
-// function promptUser(i, j, res) {
-//     setTimeout(() => { 
-//         console.log('Comparing ' + i + ' against ' + j);
-//         res(i < j);
-//         _comparisons++;
-//     }, 10);
-// }
-
-// function done() {
-//     console.log(_comparisons);
-//     console.log(a);
-// }
-
-// let s = new AvlSort(a, promptUser, done);
-// s.run();
