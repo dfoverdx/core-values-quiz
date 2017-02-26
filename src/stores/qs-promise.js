@@ -64,7 +64,7 @@ export default class QS {
             partProm = partProm.then(() => {
                 // self._comparisons++;
                 return new Promise(r => {
-                    self._promptUser(self._array, j, high, r);
+                    self._promptUser(self._array[j], self._array[high], r);
                 });
             }).then(s => {
                 inner(i, j, s);

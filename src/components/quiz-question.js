@@ -1,15 +1,10 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import Component from './component';
 import QuizButton from './quiz-button';
 import QuizActions from '../actions/quiz-actions';
 
-export default class QuizQuestion extends Component {
-    constructor(props) {
-        super(props)
-    }
-
+export default class QuizQuestion extends React.Component {
     render() {
         let { left, right, prompt } = this.props;
 

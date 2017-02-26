@@ -90,7 +90,7 @@ export default class QuizItems extends Component {
                     <ListGroupItem className={ lgiClass }>
                         { qq }
                         <h3 style={{ textAlign: 'center' }}>Questions answered: {this.state.comparisons}</h3>
-                        <p style={{ textAlign: 'center' }}>On average, this quiz is 284 questions long, but it depends on your answers.</p>
+                        <p style={{ textAlign: 'center' }}>On average, this quiz is 266 questions long, but it depends a little bit on your answers.</p>
                     </ListGroupItem>
                 </ListGroup>
                 <div className='text-muted' style={{textAlign: 'center'}}>

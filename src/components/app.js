@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Jumbotron, Navbar } from 'react-bootstrap';
+import { Grid, Jumbotron } from 'react-bootstrap';
 import Component from './component';
 import About from './about';
 import QuizItems from './quiz-items';

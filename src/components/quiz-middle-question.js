@@ -2,14 +2,9 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import QuizActions from '../actions/quiz-actions';
-import Component from './component';
 import QuizButton from './quiz-button';
 
-export default class QuizMiddleQuestion extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+export default class QuizMiddleQuestion extends React.Component {
     render() {
         let { left, leftIdx, mid, midIdx, right, rightIdx, prompt } = this.props;
 

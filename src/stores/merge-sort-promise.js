@@ -44,7 +44,7 @@ export default class MergeSort {
                 } else {
                     // this._comparisons++;
                     return new Promise(r => {
-                        this._promptUser(a, i, j, r);
+                        this._promptUser(a[i], a[j], r);
                     }).then(iltj => {
                         if (iltj) {
                             b[k] = a[i];

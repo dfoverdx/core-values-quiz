@@ -20,7 +20,7 @@ export default class QuizResults extends Component {
     }
 
     render() {
-        let items = this.props.array.map(i => <ListGroupItem><span style={{ fontSize: '24px'}}>{i.name}</span> {i.desc}</ListGroupItem>);
+        let items = this.props.array.map(i => <ListGroupItem key={i.name}><span style={{ fontSize: '24px'}}>{i.name}</span> {i.desc}</ListGroupItem>);
 
         return (
             <div className='container'>

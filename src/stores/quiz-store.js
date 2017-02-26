@@ -4,9 +4,10 @@ import * as Constants from '../constants/quiz-constants';
 import Values from './values';
 import QS from './qs-promise';
 import MS from './merge-sort-promise';
+import AVL from './avl-promise';
 
 let _sorter,
-    _algorithm = 'qs',
+    _algorithm = 'avl',
     _values = Values,
     _resolve,
     _done = false,
@@ -52,6 +53,9 @@ function handleDispatch(payload) {
                     break;
                 case 'ms':
                     _sorter = new MS(_values, promptUser, done);
+                    break;
+                case 'avl':
+                    _sorter = new AVL(_values, promptUser, done);
                     break;
                 default:
                     break;
@@ -105,9 +109,14 @@ function handleDispatch(payload) {
     this.emitChange(args);
 }
 
-function promptUser(a, i, j, res) {
+// function promptUser(a, i, j, res) {
+//     _resolve = res;
+//     QuizActions.promptUser(a[i], a[j]);
+// }
+
+function promptUser(i, j, res) {
     _resolve = res;
-    QuizActions.promptUser(a[i], a[j]);
+    QuizActions.promptUser(i, j);
 }
 
 function promptUserForMid(a, high, res) {
