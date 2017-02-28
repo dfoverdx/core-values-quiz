@@ -2,15 +2,22 @@ import Dispatcher from '../dispatcher/dispatcher';
 import * as Constants from '../constants/quiz-constants';
 
 class QuizActions {
-    beginQuiz() {
+    finishAbout() {
         Dispatcher.handleQuizAction({
-            actionType: Constants.BEGIN_QUIZ
+            actionType: Constants.FINISH_ABOUT
         });
     }
 
-    selectAlgorithm() {
+    selectAlgorithm(algorithm) {
         Dispatcher.handleQuizAction({
-            actionType: Constants.SELECT_ALGORITHM
+            actionType: Constants.SELECT_ALGORITHM,
+            algorithm: algorithm
+        });
+    }
+
+    beginQuiz() {
+        Dispatcher.handleQuizAction({
+            actionType: Constants.BEGIN_QUIZ,
         });
     }
 
@@ -25,6 +32,13 @@ class QuizActions {
         Dispatcher.handleQuizAction({
             actionType: Constants.CHOOSE_MIDDLE,
             middleIndex: middleIndex
+        });
+    }
+
+    updateProgress(progressArray) {
+        Dispatcher.handleQuizAction({
+            actionType: Constants.UPDATE_PROGRESS,
+            valuesPlaced: progressArray
         });
     }
 

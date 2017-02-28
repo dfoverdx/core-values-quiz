@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Jumbotron } from 'react-bootstrap';
 import Component from './component';
 import About from './about';
+import AlgorithmSelect from './algorithm-select';
 import QuizItems from './quiz-items';
 import QuizResults from './quiz-results';
 import * as Constants from '../constants/quiz-constants';
@@ -12,52 +13,78 @@ import QuizStore from '../stores/quiz-store';
 
 class App extends Component {
     constructor(props) {
-        super(props, 'handleStart');
+        super(props);
 
         this.state = {
-            started: false,
-            done: false,
+            stage: 'about',
             array: null
         };
     }
 
     componentDidMount() {
         QuizStore.addChangeListener(e => {
-            if (e.eventName === Constants.SORT_DONE) {
-                this.setState({
-                    done: true,
-                    array: e.array,
-                    comparisons: e.comparisons
-                });
-            }
-        });
-    }
+            switch (e.eventName) {
+                case Constants.FINISH_ABOUT:
+                    this.setState({
+                        stage: 'selectAlgorithm'
+                    });
+                    
+                    break;
 
-    handleStart() {
-        this.setState({
-            started: true
+                case Constants.SELECT_ALGORITHM:
+                    this.setState({
+                        stage: 'quiz',
+                    });
+
+                    break;
+
+                case Constants.SORT_DONE:
+                    this.setState({
+                        state: 'done',
+                        array: e.array,
+                        comparisons: e.comparisons
+                    });
+
+                    break;
+
+                default:
+                    break;
+            }
         });
     }
 
     render() {
         let qi, 
-            jumboDesc = (
-                <p>
-                    With this simple "quiz", we'll ask you to make comparisons between various values based on 
-                    what <i>you</i> feel is important.  At the end, we'll present the list in order from most 
-                    important to least important to you.  There are no wrong answers.  These are all valid 
-                    values to hold, and the final ordering is merely tailored to your personality and 
-                    preferences.
-                </p>
-            );
-
-        if (!this.state.started) {
-            qi = <About onBegin={ this.handleStart } />;
-        } else if (this.state.done) {
-            qi = <QuizResults array={ this.state.array } comparisons={ this.state.comparisons } />;
-        } else {
-            qi = <QuizItems />;
             jumboDesc = null;
+
+        switch (this.state.stage) {
+            case 'about':
+                qi = <About />;
+                jumboDesc = (
+                    <p>
+                        With this simple "quiz", we'll ask you to make comparisons between various values based on 
+                        what <i>you</i> feel is important.  At the end, we'll present the list in order from most 
+                        important to least important to you.  There are no wrong answers.  These are all valid 
+                        values to hold, and the final ordering is merely tailored to your personality and 
+                        preferences.
+                    </p>
+                );
+                break;
+
+            case 'selectAlgorithm':
+                qi = <AlgorithmSelect />;
+                break;
+
+            case 'quiz':
+                qi = <QuizItems />
+                break;
+
+            case 'done':
+                qi = <QuizResults array={ this.state.array } comparisons={ this.state.comparisons } />;
+                break;
+
+            default:
+                break;
         }
 
         return (

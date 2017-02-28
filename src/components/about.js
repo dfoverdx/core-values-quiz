@@ -1,7 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Panel, Button, Grid } from 'react-bootstrap';
 
+import Component from './component';
+
+import QuizActions from '../actions/quiz-actions';
+
 export default class About extends Component {
+    constructor(props) {
+        super(props, 'handleClick');
+    }
+
+    handleClick() {
+        QuizActions.finishAbout();
+    }
+
     render() {
         return (
             <Grid bsStyle='container'>
@@ -27,7 +39,7 @@ export default class About extends Component {
                         more meaningful, since you understand what the ordering actually means.
                     </p>
                     <div style={{ textAlign: 'center' }}>
-                        <Button bsSize='large' bsStyle='success' onClick={ this.props.onBegin }>
+                        <Button bsSize='large' bsStyle='success' onClick={ this.handleClick }>
                             Begin quiz
                         </Button>
                     </div>
@@ -36,7 +48,3 @@ export default class About extends Component {
         );
     }
 }
-
-About.propTypes = {
-    onBegin: React.PropTypes.func.isRequired
-};

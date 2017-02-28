@@ -5,17 +5,30 @@ export default class QS {
         this._promptForMiddle = promptForMiddle;
         this._done = done;
         // this._comparisons = 0;
+
+        this.doUpdateProgress = this.doUpdateProgress.bind(this);
+    }
+
+    set updateProgress(val) {
+        this._updateProgress = val;
     }
 
     run() {
-        new Promise(r => {
-            return this.runQS(0, this._array.length - 1, r);
-        }).then(() => {
-            // console.log(this._array);
-            // console.log(this._comparisons);
+        this._progressArray = new Array(this._array.length);
+        for (let i = 0; i < this._progressArray.length; i++) {
+            this._progressArray[i] = false;
+        }
 
-            this._done();
-        });
+        Promise.resolve().then(this.doUpdateProgress)
+            .then(() => new Promise(r => {
+                return this.runQS(0, this._array.length - 1, r);
+            }))
+            .then(() => {
+                // console.log(this._array);
+                // console.log(this._comparisons);
+
+                this._done();
+            });
     }
 
     runQS(low, high, resolve, part) {
@@ -28,12 +41,15 @@ export default class QS {
             }
 
             p = p.then(() => new Promise(r => { this.partition(low, high, r); }))
+                 .then(this.doUpdateProgress)
                  .then(p => new Promise(r => { this.runQS(low, p - 1, r, p); }))
                  .then(p => new Promise(r => { this.runQS(p + 1, high, r, p); }))
                  .then(() => { resolve(part); });
 
             return p;
         } else {
+            // low is in its final position by virtue of being the only remaining element
+            this.doUpdateProgress(low);
             resolve(part);
         }
     }
@@ -74,6 +90,18 @@ export default class QS {
         if (low < high) {
             addThen(i, j);
         }
+    }
+
+    doUpdateProgress(p) {
+        if (p !== undefined) {
+            this._progressArray[p] = true;
+        }
+
+        if (this._updateProgress) {
+            this._updateProgress(this._progressArray.slice());
+        }
+
+        return p;
     }
 }
 

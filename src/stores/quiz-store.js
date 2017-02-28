@@ -7,7 +7,7 @@ import MS from './merge-sort-promise';
 import AVL from './avl-promise';
 
 let _sorter,
-    _algorithm = 'avl',
+    _algorithm = 'qs',
     _values = Values,
     _resolve,
     _done = false,
@@ -44,28 +44,38 @@ function handleDispatch(payload) {
         };
 
     switch (action.actionType) {
+        case Constants.FINISH_ABOUT:
+            break;
+
+        case Constants.SELECT_ALGORITHM:
+            _algorithm = action.algorithm;
+            break;
+
         case Constants.BEGIN_QUIZ:
+            args.algorithm = _algorithm;
+
             shuffleArray(_values);
 
             switch (_algorithm) {
                 case 'qs':
                     _sorter = new QS(_values, promptUser, done, promptUserForMid);
+                    _sorter.updateProgress = updateProgress;
+
                     break;
+
                 case 'ms':
                     _sorter = new MS(_values, promptUser, done);
                     break;
+
                 case 'avl':
                     _sorter = new AVL(_values, promptUser, done);
                     break;
+
                 default:
                     break;
             }
 
             _sorter.run();
-            break;
-
-        case Constants.SELECT_ALGORITHM:
-            // todo
             break;
 
         case Constants.MAKE_COMPARISON:
@@ -78,6 +88,10 @@ function handleDispatch(payload) {
             _comparisons++;
             _resolve(action.middleIndex);
             _resolve = null;
+            break;
+
+        case Constants.UPDATE_PROGRESS:
+            args.valuesPlaced = action.valuesPlaced;
             break;
 
         case Constants.PROMPT_USER:
@@ -122,6 +136,10 @@ function promptUser(i, j, res) {
 function promptUserForMid(a, high, res) {
     _resolve = res;
     QuizActions.promptUserForMid(a, high - 2, high - 1, high);
+}
+
+function updateProgress(valuesPlaced) {
+    QuizActions.updateProgress(valuesPlaced);
 }
 
 function done() {

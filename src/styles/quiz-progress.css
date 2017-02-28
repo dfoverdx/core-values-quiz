@@ -1,0 +1,29 @@
+.quiz-progress {
+    display: table;
+    table-layout: fixed;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 0;
+    width: 100%;
+    height: 16px;
+    margin-top: 8px;
+}
+
+.quiz-progress .cell {
+    display: table-cell;
+    border-left: 1px solid #ddd;
+    margin: 0;
+    transition: background-color .5s;
+}
+
+.quiz-progress .cell:first-child {
+    border-left: none;
+}
+
+.quiz-progress .cell.placed ~ .cell.placed {
+    border-left-color: #fff;
+}
+
+.quiz-progress .cell.placed {
+    background-color: green;
+}

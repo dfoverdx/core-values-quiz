@@ -1,11 +1,13 @@
 import React from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import * as Constants from '../constants/quiz-constants';
+
 import Component from './component';
 import QuizQuestion from './quiz-question';
 import QuizMiddleQuestion from './quiz-middle-question';
+import QuizProgress from './quiz-progress';
 import '../styles/quiz-items.css';
 
+import * as Constants from '../constants/quiz-constants';
 import QuizActions from '../actions/quiz-actions';
 import QuizStore from '../stores/quiz-store';
 
@@ -20,7 +22,8 @@ export default class QuizItems extends Component {
             rightOption: null,
             rightIdx: null,
             comparisons: 0,
-            isNewPivot: false
+            isNewPivot: false,
+            averageQuestions: -1
         };
     }
 
@@ -41,28 +44,50 @@ export default class QuizItems extends Component {
     }
 
     onChange(e) {
-        if (e.eventName === Constants.PROMPT_USER) {
-            this.setState({
-                leftOption: e.left,
-                rightOption: e.right,
-                midOption: null,
-                leftIdx: null,
-                midIdx: null,
-                rightIdx: null,
-                comparisons: e.comparisons,
-                isNewPivot: false,
-            });
-        } else if (e.eventName === Constants.PROMPT_USER_FOR_MID) {
-            this.setState({
-                leftOption: e.left,
-                leftIdx: e.leftIdx,
-                midOption: e.mid,
-                midIdx: e.midIdx,
-                rightOption: e.right,
-                rightIdx: e.rightIdx,
-                comparisons: e.comparisons,
-                isNewPivot: false,
-            });
+        switch (e.eventName) {
+            case Constants.BEGIN_QUIZ:
+                if (e.algorithm === 'qs') {
+                    this.setState({
+                        averageQuestions: 284
+                    });
+                } else {
+                    this.setState({
+                        averageQuestions: 267
+                    });
+                }
+
+                break;
+
+            case Constants.PROMPT_USER:
+                this.setState({
+                    leftOption: e.left,
+                    rightOption: e.right,
+                    midOption: null,
+                    leftIdx: null,
+                    midIdx: null,
+                    rightIdx: null,
+                    comparisons: e.comparisons,
+                    isNewPivot: false,
+                });
+
+                break;
+
+            case Constants.PROMPT_USER_FOR_MID:
+                this.setState({
+                    leftOption: e.left,
+                    leftIdx: e.leftIdx,
+                    midOption: e.mid,
+                    midIdx: e.midIdx,
+                    rightOption: e.right,
+                    rightIdx: e.rightIdx,
+                    comparisons: e.comparisons,
+                    isNewPivot: false,
+                });
+
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -105,11 +130,12 @@ export default class QuizItems extends Component {
                 <ListGroup>
                     <ListGroupItem className={ lgiClass }>
                         { qq }
-                        <h3 style={{ textAlign: 'center' }}>Questions answered: {this.state.comparisons}</h3>
-                        <p style={{ textAlign: 'center' }}>On average, this quiz is 266 questions long, but it depends a little bit on your answers.</p>
+                        <QuizProgress />
+                        <h3 style={{ textAlign: 'center' }}>Questions answered: { this.state.comparisons }</h3>
+                        <p style={{ textAlign: 'center' }}>On average, this quiz is { this.state.averageQuestions } questions long, but it depends a little bit on your answers.</p>
                     </ListGroupItem>
                 </ListGroup>
-                <div className='text-muted' style={{textAlign: 'center'}}>
+                <div className='text-muted container' style={{textAlign: 'center'}}>
                     { divBtnMsg }                    
                 </div>
             </div>

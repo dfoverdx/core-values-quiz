@@ -1,27 +1,35 @@
-import React from 'react';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import React, { Component } from 'react';
 
-import QuizStore from '../stores/quiz-store';
-import Component from './component';
+import AlgorithmSelectButton from './algorithm-select-button';
 
 export default class AlgorithmSelect extends Component {
-    constructor(props) {
-        super(props, 'handleSelectionChange');
-    }
-
-    handleSelectionChange(e) {
-
-    }
-
     render() {
         return (
-            <FormGroup>
-                <ControlLabel>Sorting Method</ControlLabel>
-                <FormControl componentClass='select' placeholder='Sorting Method'>
-                    <option value='qs'>Quicksort -- average of 284 questions, but easier for the mind to process</option>
-                    <option value='ms'>Merge sort -- average of 269 questions, but harder for the mind to process</option>
-                </FormControl>
-            </FormGroup>
+            <div className='container' style={{ textAlign: 'center' }}>
+                <h3>Pick a sorting method:</h3>
+                <AlgorithmSelectButton btnVal='qs'>
+                    <h4>Quicksort</h4>
+                    <ul style={{ textAlign: 'left' }}>
+                        <li>284 questions on average</li>
+                        <li>Questions are slightly quicker to answer</li>
+                        <li>Shows progress bar</li>
+                    </ul>
+                </AlgorithmSelectButton>
+                <AlgorithmSelectButton btnVal='avl'>
+                    <h4>Binary Search Tree</h4>
+                    <ul style={{ textAlign: 'left' }}>
+                        <li>267 questions on average</li>
+                        <li>Questions are slightly slower to answer</li>
+                        <li>No progress bar</li>
+                    </ul>
+                </AlgorithmSelectButton>
+                <p className='text-muted' style={{ marginTop: 8 }}>
+                    Both options take about the same amount of time.  If you're good at switching contexts in your head 
+                    and don't care about the progress bar, choose <a href='https://en.wikipedia.org/wiki/Binary_search_tree' target='_blank'>Binary Search Tree</a>, 
+                    otherwise, choose <a href='https://en.wikipedia.org/wiki/Quicksort' target='_blank'>Quicksort</a>.
+                    In case you're interested, the binary search tree implemented is an <a href='https://en.wikipedia.org/wiki/AVL_tree' target='_blank'>AVL tree</a>.
+                </p>
+            </div>
         );
     }
 };
