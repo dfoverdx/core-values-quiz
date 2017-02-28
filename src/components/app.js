@@ -40,7 +40,7 @@ class App extends Component {
 
                 case Constants.SORT_DONE:
                     this.setState({
-                        state: 'done',
+                        stage: 'done',
                         array: e.array,
                         comparisons: e.comparisons
                     });
