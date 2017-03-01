@@ -28,3 +28,7 @@
 .quiz-progress .cell.placed {
     background-color: green;
 }
+
+.quiz-progress .cell.placed:hover {
+    background-color: #337ab7;
+}
