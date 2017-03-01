@@ -23,7 +23,7 @@ export default class AlgorithmSelect extends Component {
                         <li>No progress bar</li>
                     </ul>
                 </AlgorithmSelectButton>
-                <p className='text-muted' style={{ marginTop: 8 }}>
+                <p className='text-muted' style={{ marginTop: 8, textAlign: 'left' }}>
                     Both options take about the same amount of time.  If you're good at switching contexts in your head 
                     and don't care about the progress bar, choose <a href='https://en.wikipedia.org/wiki/Binary_search_tree' target='_blank'>Binary Search Tree</a>, 
                     otherwise, choose <a href='https://en.wikipedia.org/wiki/Quicksort' target='_blank'>Quicksort</a>.
