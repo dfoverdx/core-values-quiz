@@ -2,9 +2,10 @@ import Dispatcher from '../dispatcher/dispatcher';
 import * as Constants from '../constants/quiz-constants';
 
 class QuizActions {
-    finishAbout() {
+    selectQuestion(question) {
         Dispatcher.handleQuizAction({
-            actionType: Constants.FINISH_ABOUT
+            actionType: Constants.SELECT_QUESTION,
+            question: question
         });
     }
 

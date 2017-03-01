@@ -1,7 +1,7 @@
 import Store from './store';
 import QuizActions from '../actions/quiz-actions';
 import * as Constants from '../constants/quiz-constants';
-import Values from './values';
+import Values from '../classes/values';
 import QS from './qs-promise';
 import MS from './merge-sort-promise';
 import AVL from './avl-promise';
@@ -11,7 +11,8 @@ let _sorter,
     _values = Values,
     _resolve,
     _done = false,
-    _comparisons = 0;
+    _comparisons = 0,
+    _question;
 
 class QuizStore extends Store {
     constructor() {
@@ -44,7 +45,8 @@ function handleDispatch(payload) {
         };
 
     switch (action.actionType) {
-        case Constants.FINISH_ABOUT:
+        case Constants.SELECT_QUESTION:
+            _question = action.question;
             break;
 
         case Constants.SELECT_ALGORITHM:
@@ -98,6 +100,7 @@ function handleDispatch(payload) {
             args.left = action.left;
             args.right = action.right;
             args.comparisons = _comparisons;
+            args.question = _question.singular;
             break;
 
         case Constants.PROMPT_USER_FOR_MID:
@@ -113,6 +116,7 @@ function handleDispatch(payload) {
         case Constants.SORT_DONE:
             args.array = action.array;
             args.comparisons = _comparisons;
+            args.question = _question.plural;
             _done = true;
             break;
 
@@ -122,11 +126,6 @@ function handleDispatch(payload) {
 
     this.emitChange(args);
 }
-
-// function promptUser(a, i, j, res) {
-//     _resolve = res;
-//     QuizActions.promptUser(a[i], a[j]);
-// }
 
 function promptUser(i, j, res) {
     _resolve = res;

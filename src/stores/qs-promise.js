@@ -49,7 +49,10 @@ export default class QS {
             return p;
         } else {
             // low is in its final position by virtue of being the only remaining element
-            this.doUpdateProgress(low);
+            if (low < this._array.length) {
+                this.doUpdateProgress(low);
+            }
+            
             resolve(part);
         }
     }

@@ -1,5 +1,5 @@
 export const QUIZ_ACTION = 'QUIZ_ACTION';
-export const FINISH_ABOUT = 'FINISH_ABOUT';
+export const SELECT_QUESTION = 'SELECT_QUESTION';
 export const BEGIN_QUIZ = 'BEGIN_QUIZ';
 export const SELECT_ALGORITHM = 'SELECT_ALGORITHM';
 export const MAKE_COMPARISON = 'MAKE_COMPARISON';

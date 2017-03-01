@@ -68,6 +68,7 @@ export default class QuizItems extends Component {
                     rightIdx: null,
                     comparisons: e.comparisons,
                     isNewPivot: false,
+                    prompt: e.question
                 });
 
                 break;
@@ -98,7 +99,7 @@ export default class QuizItems extends Component {
         if (this.state.leftOption) { // check if we even have a prompt
             if (!isChoosePivot) {
                 qq = <QuizQuestion left={ this.state.leftOption } right={ this.state.rightOption } 
-                        prompt='Which is more important to you?' />;
+                        prompt={ this.state.prompt } />;
             } else {
                 qq = <QuizMiddleQuestion left={ this.state.leftOption } leftIdx={ this.state.leftIdx }
                         mid={ this.state.midOption } midIdx={ this.state.midIdx }

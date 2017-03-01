@@ -16,7 +16,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            stage: 'about',
+            stage: 'question',
             array: null
         };
     }
@@ -24,7 +24,7 @@ class App extends Component {
     componentDidMount() {
         QuizStore.addChangeListener(e => {
             switch (e.eventName) {
-                case Constants.FINISH_ABOUT:
+                case Constants.SELECT_QUESTION:
                     this.setState({
                         stage: 'selectAlgorithm'
                     });
@@ -42,7 +42,8 @@ class App extends Component {
                     this.setState({
                         stage: 'done',
                         array: e.array,
-                        comparisons: e.comparisons
+                        comparisons: e.comparisons,
+                        question: e.question
                     });
 
                     break;
@@ -58,7 +59,7 @@ class App extends Component {
             jumboDesc = null;
 
         switch (this.state.stage) {
-            case 'about':
+            case 'question':
                 qi = <About />;
                 jumboDesc = (
                     <p>
@@ -80,7 +81,7 @@ class App extends Component {
                 break;
 
             case 'done':
-                qi = <QuizResults array={ this.state.array } comparisons={ this.state.comparisons } />;
+                qi = <QuizResults array={ this.state.array } comparisons={ this.state.comparisons } question={ this.state.question } />;
                 break;
 
             default:

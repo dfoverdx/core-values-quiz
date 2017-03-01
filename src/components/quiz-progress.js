@@ -63,16 +63,12 @@ export default class QuizProgress extends Component {
         }
 
         let progressItems = this.state.valuesPlaced.map((pv, i) => {
-                if (pv) {
-                    let tooltip = <Tooltip id={ 'progressTooltip' + i }>{ QuizStore.curValues[i].name }</Tooltip>;
-                    return (
-                        <OverlayTrigger key={ 'progItem' + i } overlay={ tooltip } placement='top'>
-                            <div className='cell placed' />
-                        </OverlayTrigger>
-                    );
-                } else {
-                    return <div key={ 'progItem' + i } className='cell' />;
-                }
+                let tooltip = pv ? <Tooltip id={ 'progressTooltip' + i }>{ QuizStore.curValues[i].name }</Tooltip> : <div />;
+                return (
+                    <OverlayTrigger key={ 'progItem' + i } overlay={ tooltip } placement='top'>
+                        <div className={'cell' + (pv ? ' placed' : '') } />
+                    </OverlayTrigger>
+                );
             });
 
         return (

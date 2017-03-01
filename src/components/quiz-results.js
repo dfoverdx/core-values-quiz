@@ -9,7 +9,7 @@ export default class QuizResults extends Component {
     }
 
     saveResults() {
-        let str = '',
+        let str = this.props.question + '\r\n',
             array = this.props.array;
         for (let i = 0; i < array.length; i++) {
             str += (i + 1) + '. ' + array[i].name + ' - ' + array[i].desc + '\r\n';
@@ -20,14 +20,15 @@ export default class QuizResults extends Component {
     }
 
     render() {
-        let items = this.props.array.map(i => <ListGroupItem key={i.name}><span style={{ fontSize: '24px'}}>{i.name}</span> {i.desc}</ListGroupItem>);
+        let items = this.props.array.map(i => <li key={i.name}><span style={{ fontSize: '20px'}}>{i.name}</span> <span className='text-muted'>{i.desc}</span></li>);
 
         return (
             <div className='container'>
                 <Col xs={12} sm={8} style={{ marginBottom: 40 }}>
-                    <ListGroup>
+                    <p className='lead'>{ this.props.question }</p>
+                    <ol>
                         {items}
-                    </ListGroup>
+                    </ol>
                 </Col>
                 <Col xs={12} sm={4}>
                     <Panel header="Results">
@@ -46,4 +47,5 @@ export default class QuizResults extends Component {
 QuizResults.propTypes = {
     array: React.PropTypes.array.isRequired,
     comparisons: React.PropTypes.number.isRequired,
+    question: React.PropTypes.string.isRequired
 };
