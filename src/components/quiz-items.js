@@ -1,5 +1,4 @@
 import React from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import Component from './component';
 import QuizQuestion from './quiz-question';
@@ -128,14 +127,12 @@ export default class QuizItems extends Component {
 
         return (
             <div>
-                <ListGroup>
-                    <ListGroupItem className={ lgiClass }>
-                        { qq }
-                        <QuizProgress />
-                        <h3 style={{ textAlign: 'center' }}>Questions answered: { this.state.comparisons }</h3>
-                        <p style={{ textAlign: 'center' }}>On average, this quiz is { this.state.averageQuestions } questions long, but it depends a little bit on your answers.</p>
-                    </ListGroupItem>
-                </ListGroup>
+                <div className={ 'quiz-items ' + lgiClass }>
+                    { qq }
+                    <QuizProgress />
+                    <h3 style={{ textAlign: 'center' }}>Questions answered: { this.state.comparisons }</h3>
+                    <p style={{ textAlign: 'center' }}>On average, this quiz is { this.state.averageQuestions } questions long, but it depends a little bit on your answers.</p>
+                </div>
                 <div className='text-muted container' style={{textAlign: 'center'}}>
                     { divBtnMsg }                    
                 </div>
