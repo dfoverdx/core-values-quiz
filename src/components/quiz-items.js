@@ -128,12 +128,14 @@ export default class QuizItems extends Component {
         return (
             <div>
                 <div className={ 'quiz-items ' + lgiClass }>
-                    { qq }
-                    <QuizProgress />
-                    <h3 style={{ textAlign: 'center' }}>Questions answered: { this.state.comparisons }</h3>
-                    <p style={{ textAlign: 'center' }}>On average, this quiz is { this.state.averageQuestions } questions long, but it depends a little bit on your answers.</p>
+                    <div className='container'>
+                        { qq }
+                        <QuizProgress />
+                        <h3 style={{ textAlign: 'center' }}>Questions answered: { this.state.comparisons }</h3>
+                        <p style={{ textAlign: 'center' }}>On average, this quiz is { this.state.averageQuestions } questions long, but it depends a little bit on your answers.</p>
+                    </div>
                 </div>
-                <div className='text-muted container' style={{textAlign: 'center'}}>
+                <div className='container text-muted container hidden-xs' style={{textAlign: 'center'}}>
                     { divBtnMsg }                    
                 </div>
             </div>

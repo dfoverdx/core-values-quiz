@@ -30,7 +30,7 @@ export default class QuizButton extends Component {
 
     render() {
         let { name, desc, keyShortcut } = this.props;
-        let kbd = keyShortcut ? <span className='kbd'>{ keyShortcut }</span> : null;
+        let kbd = keyShortcut ? <span className='kbd hidden-xs'>{ keyShortcut }</span> : null;
         return (
             <Button bsSize='large' className='quiz-btn' onClick={ this.handleClick }>
                 { kbd }

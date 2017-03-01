@@ -31,7 +31,7 @@ export default class QuizMiddleQuestion extends React.Component {
                         </div>
                     </Col>
                 </Row>
-                <Row>
+                <Row className='hidden-xs'>
                     <Col xs={12} className='text-muted' style={{ textAlign: 'center', marginTop: 4 }}>
                         <b>What's this?</b> Correctly choosing the second most important option does not affect the 
                         ordering, but reduces the number of questions needed by an average of 27 questions.

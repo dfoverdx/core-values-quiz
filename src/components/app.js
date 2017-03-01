@@ -1,4 +1,5 @@
 import React from 'react';
+import DocumentMeta from 'react-document-meta';
 import { Grid, Jumbotron } from 'react-bootstrap';
 import Component from './component';
 import About from './about';
@@ -87,9 +88,15 @@ class App extends Component {
             default:
                 break;
         }
+        
+        const meta = {
+            viewport: 'width=device-width, initial-scale:1.0, maximum-scale=1'
+        };
 
         return (
+
             <div className="App">
+                <DocumentMeta {...meta} />
                 <Jumbotron>
                     <Grid bsClass='container'>
                         <h1>Determine Your Core Values</h1>
