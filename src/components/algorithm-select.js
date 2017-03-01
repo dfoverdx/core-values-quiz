@@ -9,7 +9,7 @@ export default class AlgorithmSelect extends Component {
                 <h3>Pick a sorting method:</h3>
                 <AlgorithmSelectButton btnVal='qs'>
                     <h4>Quicksort</h4>
-                    <ul style={{ textAlign: 'left' }}>
+                    <ul style={{ textAlign: 'left', paddingLeft: 20 }}>
                         <li>284 questions on average</li>
                         <li>Questions are slightly quicker to answer</li>
                         <li>Shows progress bar</li>
@@ -17,7 +17,7 @@ export default class AlgorithmSelect extends Component {
                 </AlgorithmSelectButton>
                 <AlgorithmSelectButton btnVal='avl'>
                     <h4>Binary Search Tree</h4>
-                    <ul style={{ textAlign: 'left' }}>
+                    <ul style={{ textAlign: 'left', paddingLeft: 20 }}>
                         <li>267 questions on average</li>
                         <li>Questions are slightly slower to answer</li>
                         <li>No progress bar</li>
