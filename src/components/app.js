@@ -93,7 +93,16 @@ class App extends Component {
         }
 
         const meta = {
-            viewport: 'width=device-width, initial-scale:1.0, maximum-scale=1'
+            viewport: 'width=device-width, initial-scale:1.0, maximum-scale=1',
+            description: 'Determine which values are most important to you with this simple quiz.',
+            canonical: 'https://dfoverdx.github.io/core-values-quiz',
+            meta: {
+                name: {
+                    keywords: 'values,core values,self analysis,quiz,personality quiz',
+                    author: 'Jordan Hitch'
+                }
+            },
+            title: 'Core Values'
         };
 
         return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import Component from './component';
 import FileSaver from 'file-saver';
-import { Col, Panel, ListGroup, ListGroupItem, Button, Glyphicon } from 'react-bootstrap';
+import { Col, Panel, Button, Glyphicon } from 'react-bootstrap';
 
 export default class QuizResults extends Component {
     constructor(props) {
