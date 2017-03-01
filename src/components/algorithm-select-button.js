@@ -16,7 +16,7 @@ export default class AlgorithmSelectButton extends Component {
 
     render() {
         return (
-            <Button onClick={ this.handleClick } style={{ marginRight: 8 }}>
+            <Button onClick={ this.handleClick } style={{ marginRight: 8 }} bsStyle={ this.props.bsStyle} >
                 { this.props.children }
             </Button>
         );
@@ -24,5 +24,6 @@ export default class AlgorithmSelectButton extends Component {
 }
 
 AlgorithmSelectButton.propTypes = {
-    btnVal: React.PropTypes.string.isRequired
+    btnVal: React.PropTypes.string.isRequired,
+    bsStyle: React.PropTypes.string
 };

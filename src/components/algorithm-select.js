@@ -7,7 +7,7 @@ export default class AlgorithmSelect extends Component {
         return (
             <div className='container' style={{ textAlign: 'center' }}>
                 <h3>Pick a sorting method:</h3>
-                <AlgorithmSelectButton btnVal='qs'>
+                <AlgorithmSelectButton btnVal='qs' bsStyle='primary'>
                     <h4>Quicksort</h4>
                     <ul style={{ textAlign: 'left', paddingLeft: 20 }}>
                         <li>284 questions on average</li>
