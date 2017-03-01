@@ -57,11 +57,13 @@ class App extends Component {
 
     render() {
         let qi, 
-            jumboDesc = null;
+            jumboDesc = null,
+            jumboHiddenXs = 'hidden-xs';
 
         switch (this.state.stage) {
             case 'question':
                 qi = <About />;
+                jumboHiddenXs = '';
                 jumboDesc = (
                     <p>
                         With this simple "quiz", we'll ask you to make comparisons between various values based on 
@@ -82,13 +84,14 @@ class App extends Component {
                 break;
 
             case 'done':
+                jumboHiddenXs = '';
                 qi = <QuizResults array={ this.state.array } comparisons={ this.state.comparisons } question={ this.state.question } />;
                 break;
 
             default:
                 break;
         }
-        
+
         const meta = {
             viewport: 'width=device-width, initial-scale:1.0, maximum-scale=1'
         };
@@ -97,7 +100,7 @@ class App extends Component {
 
             <div className="App">
                 <DocumentMeta {...meta} />
-                <Jumbotron>
+                <Jumbotron className={ jumboHiddenXs }>
                     <Grid bsClass='container'>
                         <h1>Determine Your Core Values</h1>
                         { jumboDesc }
