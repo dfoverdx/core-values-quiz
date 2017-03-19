@@ -6,7 +6,7 @@ export default class AppFooter extends Component {
     render() {
         return (
             <Navbar fixedBottom className='hidden-xs'>
-                <div className='navbar-text'>
+                <div className='navbar-text' style='margin-left: 0'>
                     <ul className='list-inline'>
                         <li>
                             <a className='navbar-link' href="http://thehappinesstrap.com/upimages/complete_worksheets_for_The_Confidence_Gap.pdf">
@@ -18,7 +18,7 @@ export default class AppFooter extends Component {
                         </li>
                     </ul>
                 </div>
-                <div className='navbar-right navbar-text'>
+                <div className='navbar-right navbar-text' style='margin-right: 15px'>
                     <a href='/'>Jordan Hitch</a> © 2017
                 </div>
             </Navbar>
