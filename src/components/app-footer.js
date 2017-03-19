@@ -19,7 +19,7 @@ export default class AppFooter extends Component {
                     </ul>
                 </div>
                 <div className='navbar-right navbar-text'>
-                    Jordan Hitch © 2017
+                    <a href='/'>Jordan Hitch</a> © 2017
                 </div>
             </Navbar>
         );
