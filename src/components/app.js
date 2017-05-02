@@ -29,7 +29,7 @@ class App extends Component {
                     this.setState({
                         stage: 'selectAlgorithm'
                     });
-                    
+
                     break;
 
                 case Constants.SELECT_ALGORITHM:
@@ -56,7 +56,7 @@ class App extends Component {
     }
 
     render() {
-        let qi, 
+        let qi,
             jumboDesc = null,
             jumboHiddenXs = 'hidden-xs';
 
@@ -66,10 +66,10 @@ class App extends Component {
                 jumboHiddenXs = '';
                 jumboDesc = (
                     <p>
-                        With this simple "quiz", we'll ask you to make comparisons between various values based on 
-                        what <i>you</i> feel is important.  At the end, we'll present the list in order from most 
-                        important to least important to you.  There are no wrong answers.  These are all valid 
-                        values to hold, and the final ordering is merely tailored to your personality and 
+                        With this simple "quiz", we'll ask you to make comparisons between various values based on
+                        what <i>you</i> feel is important.  At the end, we'll present the list in order from most
+                        important to least important to you.  There are no wrong answers.  These are all valid
+                        values to hold, and the final ordering is merely tailored to your personality and
                         preferences.
                     </p>
                 );
@@ -95,7 +95,7 @@ class App extends Component {
         const meta = {
             viewport: 'width=device-width, initial-scale:1.0, maximum-scale=1',
             description: 'Determine which values are most important to you with this simple quiz.',
-            canonical: 'https://dfoverdx.github.io/core-values-quiz',
+            canonical: 'http://dfdx.us/core-values-quiz',
             meta: {
                 name: {
                     keywords: 'values,core values,self analysis,quiz,personality quiz',
