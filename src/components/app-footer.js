@@ -1,6 +1,6 @@
+import '../styles/app-footer.css';
 import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
-import '../styles/app-footer.css';
 
 export default class AppFooter extends Component {
     render() {
@@ -19,7 +19,7 @@ export default class AppFooter extends Component {
                     </ul>
                 </div>
                 <div className='navbar-right navbar-text' style={{marginRight: 0}}>
-                    <a href='/'>Jordan Hitch</a> © 2017
+                    <a href='/'>Bethany Hitch</a> © 2023
                 </div>
             </Navbar>
         );
